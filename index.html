@@ -9,24 +9,54 @@
 
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body onload="LoadShowCatalog()">
     <div id="BodyWrapper">
         <div id="topbar">
             <img id="FilmsyLogo" src="src/Filmsy.png">
-            <a>Catalog</a>
+            <a style="text-decoration: underline;">Catalog</a>
             <a>Support</a>
         </div>
         <div id="HomeScreen">
-            <div id="ContinueWatching">
-                <div Class="Show">
-                    <img src="https://wwwimage-us.pplusstatic.com/base/files/seo/sbsp_social_1200x627.jpg">
-                    <a>Example</a>
+            <div id="ShowList">
+                <div Class="Show" onclick="SelectShow(this.children[1].textContent)">
+                    <img src="src/pholder.png">
+                    <a id="showName">text</a>
                 </div>
-            </div>
-            <div id="Recommended">
-
             </div>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    ShowList = ["Spongebob Squarepants"]
+    ShowIconList = {
+        ["Spongebob Squarepants"]: "src/Spongebob.jpg"
+    }
+
+    function LoadShowCatalog() {
+        ShowTemplate = document.getElementsByClassName("Show")[0]
+        for (const show of ShowList) {
+            if (ShowList.count > 1){
+                newShow = ShowTemplate.cloneNode(true)
+                newShow.children[1].textContent = show
+                document.getElementById("ShowList").getElementsByClassName("Show")[0].after(newShow);
+            }else {
+                newShow = ShowTemplate
+                newShow.children[1].textContent = show
+                newShow.children[0].src = ShowIconList[show]
+                document.getElementById("ShowList").getElementsByClassName("Show")[0].after(newShow);
+            }
+        }
+    }
+    function SelectShow(v) {
+        if (localStorage.getItem("Show") !== v){
+            localStorage.setItem("Show",v)
+            localStorage.setItem("Season",1)
+            localStorage.setItem("Episode",0)
+            localStorage.setItem("TimeStamp",0)
+        }
+        window.location.assign("player.html")
+    }
+
+</script>

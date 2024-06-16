@@ -1,0 +1,46 @@
+body{
+    background-color: #0e0e0e;
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden;
+
+    width: auto;
+    height: auto;
+}
+#BodyWrapper {
+    overflow: hidden;
+}
+
+#topbar {
+    background-color: #0e0f16;
+    position: fixed;
+    font-size: x-large;
+    width: 100%;
+    height: auto;
+
+    top: 0%;
+    z-index: 5;
+}
+#FilmsyLogo {
+    width: 8vh;
+}
+#topbar a {
+    position: relative;
+    color: white;
+    text-shadow: rgb(255, 255, 255) 1px 0 10px;
+    bottom: 2.3vh;
+    padding-right: .5vw;
+
+    transition-duration: 250ms;
+}
+#topbar a:hover {
+    color: rgb(41, 49, 119);
+    text-shadow: rgb(70, 31, 179) 1px 0 10px;
+    cursor: grab;
+}
+
+#player {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
