@@ -29,16 +29,20 @@
 </html>
 
 <script>
-    ShowList = ["Spongebob Squarepants"]
+    ShowList = ["Spongebob Squarepants","Fionna And Cake"]
     ShowIconList = {
-        ["Spongebob Squarepants"]: "src/Spongebob.jpg"
+        ["Spongebob Squarepants"]: "src/Spongebob.jpg",
+        ["Fionna And Cake"]: "src/FionnaAndCake.jpg"
     }
 
     function LoadShowCatalog() {
         ShowTemplate = document.getElementsByClassName("Show")[0]
+        i=0
         for (const show of ShowList) {
-            if (ShowList.count > 1){
+            if (i==0){
+                i+=1
                 newShow = ShowTemplate.cloneNode(true)
+                newShow.children[0].src = ShowIconList[show]
                 newShow.children[1].textContent = show
                 document.getElementById("ShowList").getElementsByClassName("Show")[0].after(newShow);
             }else {
