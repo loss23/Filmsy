@@ -1,0 +1,74 @@
+body{
+    background-color: #0e0e0e;
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    overflow-y: auto;
+
+    width: auto;
+    height: auto;
+}
+#BodyWrapper {
+    overflow: hidden;
+}
+
+#topbar {
+    background-color: #0e0f16;
+    position: fixed;
+    font-size: x-large;
+    width: 100%;
+    height: auto;
+
+    top: 0%;
+    z-index: 5;
+}
+#FilmsyLogo {
+    width: 8vh;
+}
+#topbar a {
+    position: relative;
+    color: white;
+    text-shadow: rgb(255, 255, 255) 1px 0 10px;
+    bottom: 2.3vh;
+    padding-right: .5vw;
+
+    transition-duration: 250ms;
+}
+#topbar a:hover {
+    color: rgb(41, 49, 119);
+    text-shadow: rgb(70, 31, 179) 1px 0 10px;
+}
+
+/* #0e0e0e; */
+
+.Show {
+    position: relative;
+    width: 20vw;
+    height: 20vh;
+    
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+
+    top: 10vh;
+
+    color: white;
+    
+    font-size: 2rem;
+    text-align: justify;
+}
+.Show img{
+    width: inherit;
+    height: inherit;
+}
+.Show a {
+    position: relative;
+    top: -5vh;
+    color: black;
+}
+
+#HomeScreen {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #181a24;
+}
