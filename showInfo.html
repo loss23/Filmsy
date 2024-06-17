@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmsy</title>
+    <meta property="og:title" content="Filmsy" />
+    <meta property="og:description" content="Filmsy is a free streaming service!" />
+
+    <link rel="stylesheet" href="showInfo.css">
+</head>
+<body onload="UpdateList()">
+    <div id="BodyWrapper">
+        <div id="topbar">
+            <img id="FilmsyLogo" src="src/Filmsy.png">
+            <a onclick="Catalog()">Catalog</a>
+            <a>Support</a>
+        </div>
+        <div id="ShowInfoSection">
+            <img src="src/Spongebob Squarepants/Spongebob Squarepants.jpg">
+            <h1>Show Name</h1>
+            <h5>Description</h5>
+
+            <div id="Bottomsep"></div>
+                <div id="SeasonSelect">
+                <a>Season:</a>
+                <select id="SeasonSelectionElement" onchange="localStorage.setItem('Season',this.value)">
+                    <option>1</option>
+                </select>
+            </div>
+        </div>
+        <div id="EpisodeSection">
+            <div Class="Episode" onclick="SelectEpisode(this.children[1].textContent)">
+                <img src="src/Spongebob Squarepants/S1.png">
+                <a id="showName">Episode 1</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    EpisodeList = {
+        ["Spongebob Squarepants"]: {
+            [1]: ["https://s3.tebi.io/index/Spongebob%20Ep1.mp4","https://s3.tebi.io/index/Spongebob%20Ep2.mp4","https://s3.tebi.io/index/Spongebob%20Ep3.mp4","https://s3.tebi.io/index/Spongebob%20Ep4.mp4","https://s3.tebi.io/index/Spongebob%20Ep5.mp4","https://s3.tebi.io/index/Spongebob%20Ep6.mp4","https://s3.tebi.io/index/Spongebob%20Ep7.mp4","https://s3.tebi.io/index/Spongebob%20Ep8.mp4","https://s3.tebi.io/index/Spongebob%20Ep9.mp4","https://s3.tebi.io/index/Spongebob%20Ep10.mp4","https://s3.tebi.io/index/Spongebob%20Ep11.mp4","https://s3.tebi.io/index/Spongebob%20Ep12.mp4","https://s3.tebi.io/index/Spongebob%20Ep13.mp4","https://s3.tebi.io/index/Spongebob%20Ep14.mp4","https://s3.tebi.io/index/Spongebob%20Ep15.mp4","https://s3.tebi.io/index/Spongebob%20Ep16.mp4","https://s3.tebi.io/index/Spongebob%20Ep17.mp4","https://s3.tebi.io/index/Spongebob%20Ep18.mp4","https://s3.tebi.io/index/Spongebob%20Ep19.mp4","https://s3.tebi.io/index/Spongebob%20Ep20.mp4"],
+            [2]: [],
+            [3]: [],
+            [4]: []
+        },
+        ["Fionna And Cake"]: {
+            [1]: ["https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake1.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake2.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake3.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake4.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake5.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake6.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCakeEp7.mp4", "https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCakeEp8.mp4","https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake9.mp4","https://s3.tebi.io/index/FionnaAndCakeS1/FionnaAndCake10.mp4"]
+        }
+    }
+
+    ShowDescriptionList = {
+        ["Spongebob Squarepants"]: "A square yellow sponge named SpongeBob SquarePants lives in a pineapple with his pet snail, Gary, in the city of Bikini Bottom on the floor of the Pacific Ocean. He works as a fry cook at the Krusty Krab. During his time off, SpongeBob has a knack for attracting trouble with his starfish best friend, Patrick. Arrogant octopus Squidward Tentacles, SpongeBob's neighbor, dislikes SpongeBob because of his childlike behavior."
+    }
+    
+    function UpdateList() {
+        EpisodeTemplate = document.getElementsByClassName("Episode")[0]
+
+        ShowImage = document.getElementById("ShowInfoSection").children[0]
+        ShowTitle = document.getElementById("ShowInfoSection").children[1]
+        ShowDescription = document.getElementById("ShowInfoSection").children[2]
+
+        ShowTitle.textContent = localStorage.getItem("Show")
+        ShowImage.src = "src/"+localStorage.getItem("Show")+"/"+localStorage.getItem("Show")+".jpg"
+        ShowDescription.textContent = ShowDescriptionList[localStorage.getItem("Show")]
+        
+        SeasonTemplate = document.getElementById("SeasonSelectionElement").children[0]
+        for (var Season in EpisodeList[localStorage.getItem("Show")]) {
+            newSeasonTemplate = SeasonTemplate.cloneNode(true)
+            newSeasonTemplate.value = Season
+            newSeasonTemplate.textContent = Season
+        }
+
+        for (var Episode in EpisodeList[localStorage.getItem("Show")][1]) {
+                newEpisodeTemplate = EpisodeTemplate.cloneNode(true)
+                newEpisodeTemplate.children[1].textContent = "Episode "+(Number(Episode)+1)
+                newEpisodeTemplate.children[0].src = "src/"+localStorage.getItem("Show")+"/S"+localStorage.getItem("Season")+".png"
+                EpisodeTemplate.before(newEpisodeTemplate)
+        }
+        EpisodeTemplate.remove()
+    }
+
+    function SelectEpisode(v) {
+        console.log(localStorage.getItem("Episode"))
+        console.log(Number(v.replace("Episode ","")-1))
+        if (Number(localStorage.getItem("Episode")) !== Number(v.replace("Episode ","")-1)) {
+            localStorage.setItem("Episode",Number(v.replace("Episode ",""))-1)
+            localStorage.setItem("TimeStamp",0)
+        }
+        location.assign("player.html")
+    }
+
+    function Catalog() {
+        location.assign("index.html")
+    }
+</script>

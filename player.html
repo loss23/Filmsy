@@ -18,7 +18,7 @@
             <a onclick="Catalog()">Catalog</a>
             <a>Support</a>
         </div>
-        <video onended="LoadNext()" controls controlsList="nodownload noremoteplayback" autoplay id="player" src=""></video>
+        <video preload="metadata" onended="LoadNext()" controls controlsList="nodownload noremoteplayback" autoplay id="player" src=""></video>
 </body>
 
 </html>
@@ -52,6 +52,8 @@
         CurrentSeason = localStorage.getItem("Season") || 1
         CurrentEpisode = localStorage.getItem("Episode") || 0
         CurrentTimeStamp = localStorage.getItem("TimeStamp") || 0
+
+        document.title = CurrentShow
 
         if (!CurrentShow || CurrentShow == null || !EpisodeList[CurrentShow]) {
             window.location.assign("index.html")
