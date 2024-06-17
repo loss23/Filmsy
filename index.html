@@ -29,10 +29,12 @@
 </html>
 
 <script>
-    ShowList = ["Spongebob Squarepants","Fionna And Cake"]
+    ShowList = ["Spongebob Squarepants","Fionna And Cake","Rick And Morty","Bojack Horseman"]
     ShowIconList = {
         ["Spongebob Squarepants"]: "src/Spongebob Squarepants/Spongebob Squarepants.png",
-        ["Fionna And Cake"]: "src/Fionna And Cake/Fionna And Cake.png"
+        ["Fionna And Cake"]: "src/Fionna And Cake/Fionna And Cake.png",
+        ["Rick And Morty"]: "src/Rick And Morty/Rick And Morty.png",
+        ["Bojack Horseman"]: "src/Bojack Horseman/Bojack Horseman.png"
     }
 
     function LoadShowCatalog() {
@@ -41,12 +43,12 @@
         for (const show of ShowList) {
             if (i==0){
                 i+=1
-                newShow = ShowTemplate.cloneNode(true)
+                newShow = ShowTemplate
                 newShow.children[0].src = ShowIconList[show]
                 newShow.children[1].textContent = show
                 document.getElementById("ShowList").getElementsByClassName("Show")[0].after(newShow);
             }else {
-                newShow = ShowTemplate
+                newShow = ShowTemplate.cloneNode(true)
                 newShow.children[1].textContent = show
                 newShow.children[0].src = ShowIconList[show]
                 document.getElementById("ShowList").getElementsByClassName("Show")[0].after(newShow);
@@ -54,6 +56,7 @@
         }
     }
     function SelectShow(v) {
+        localStorage.setItem("Show",v)
         if (localStorage.getItem("Show") !== v){
             localStorage.setItem("Show",v)
             localStorage.setItem("Season",1)
