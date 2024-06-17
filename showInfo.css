@@ -137,3 +137,14 @@ body{
     grid-template-rows: repeat(600, 1fr);
     gap: 10px;
 }
+
+#ResumeButton {
+    position: absolute;
+    left: 34%;
+    bottom: 62%;
+
+    font-size: 2rem;
+    color: white;
+    background-color: #161616;
+    border-width: 0px;
+}
